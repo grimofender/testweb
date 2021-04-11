@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Hello World!</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <p> Hello World! This was made for a school project. I hope you have a nice time here. </p>
+        <div>
+            <button id="btn1-cookie-quest"> try clicking this! </button>
+            <button id="btn2-cookie-quest", style="display:none;"> Or This... </button>
+            <button id="btn3-cookie-quest", style="display:none;"> And This... </button>
+            <button id="btn4-cookie-quest", style="display:none;"> Not This... </button>
+            <button id="btn5-cookie-quest", style="display:none; color: red;"> But This... </button>
+            <div id="cookie" style="display:none;">
+                <p>Have a cookie</p>
+                <img src="public\maple-cookie.png" alt="<insert-cookie>"></img>
+            </div>
+            
+            <script>
+                $("#btn1-cookie-quest").click(() => $("#btn2-cookie-quest").fadeIn(100));
+                $("#btn2-cookie-quest").click(() => $("#btn3-cookie-quest").fadeIn(100));
+                $("#btn3-cookie-quest").click(()=>{ 
+                    $("#btn4-cookie-quest").fadeIn(100);
+                    $("#btn5-cookie-quest").delay(1000).fadeIn(1000);
+                });
+                $("#btn4-cookie-quest").click(()=>window.open("https://www.youtube.com/watch?v=oHg5SJYRHA0"));
+                $("#btn5-cookie-quest").click(() => {
+                    $("#cookie").fadeIn(500);
+                });
+                $("#cookie").click(()=>window.open("monster"))
+                const opengame = ()=>window.open("game");
+                var possiblegoogles = [
+                    "How to get friends",
+                    "How to find the cure to cancer",
+                    "how to contribute to society",
+                    "How to be a good person",
+                    "How to find love",
+                    "How to Stay Safe When Driving in the Desert",
+                    "How to die with fullfillment",
+                    "How to Measure Room Temperature",
+                    "Closest, Macdonalds",
+                    "Closest, BurgerKing",
+                    "do a barrel roll",
+                    "recursion",
+                    "the answer to life the universe and everything",
+                    "zerg rush",
+                    "conway’s game of life",
+                    "once in a blue moon",
+                ];
+
+                const google = ()=>window.open(`https://google.com/search?q=${possiblegoogles[Math.floor(Math.random()*possiblegoogles.length)]}`);
+            </script>
+        </div>
+        <button onclick="opengame()">Play a game</button>
+        <button onclick="google()">google something random</button>
+
+
+
+    </body>
+
+</html>

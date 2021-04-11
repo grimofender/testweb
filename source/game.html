@@ -17,9 +17,9 @@
 
                 function startcallback() {
                     let instructions = document.getElementById("instruction");
-                    $(instructions).html("Game Over :'(<br> Click to play again")
+                    $(instructions).html("Game Over :'(<br> <button id=\"start_button\">Click to play again</button>")
                     $(instructions).fadeIn(1000);
-                    $(document).one("click", ()=> {
+                    $("#start_button").one("click", ()=> {
                         start(ctx, startcallback)
                         $(instructions).fadeOut(1000);
                     });
@@ -27,7 +27,7 @@
 
                 start(ctx, startcallback, document.getElementById("zen").checked);
             }
-            $(document).one("click", begin);
+            $("#start_button").one("click", begin);
         </script>
     </head>
 
@@ -38,7 +38,7 @@
             <mark style="color:#ff0000; background:none;">press WASD (or the arrow keys) to move</mark> <br>
             <mark style="color:#0000ff; background:none;">click the left mouse button (or space/z) to shoot a laser</mark> <br>
             <mark style="color:#00FF00; background:none;">WARNING LASERS (IN GAME) MAY CAUSE SEIZURES PLEASE BEWARE</mark><br>
-            click to begin
+            <button id="start_button">click to begin</button>
         </p>
     </body>
 </html>

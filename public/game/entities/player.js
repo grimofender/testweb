@@ -72,7 +72,7 @@ export class Player extends Entity {
             let pt = [entity.position[0] + 10, entity.position[1] + 5];
             let distance = Math.sqrt(Math.pow(pt[0]-this.position[0], 2)+Math.pow(pt[1]-this.position[1], 2));
 
-            if (distance < 20) {
+            if (distance < 20*(document.getElementById("bullet_size").value/100)) {
                 meta.stopgame();
             }
         });

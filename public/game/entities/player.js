@@ -55,7 +55,7 @@ export class Player extends Entity {
             this.velocity[1] = lerp(this.velocity[1], 0, delta*this.friction);
         }
 
-        if (mousedown) {
+        if (mousedown || pressedKeys[32] || pressedKeys[90]) {
             var localmousepos = canvasToGlobal(screenToCanvas(mousepos, meta.ctx), meta.ctx);
             var dir = Math.atan2(localmousepos[1]-this.position[1], localmousepos[0]-this.position[0]);
             meta.entities.push(new Laser(this.position[0] + Math.cos(dir)*40, this.position[1] + Math.sin(dir)*40, dir))

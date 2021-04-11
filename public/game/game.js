@@ -6,7 +6,7 @@ var tickerstarted = false;
 var entities = Array(0);
 var running = false;
 
-export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop) {
+export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop, zen) {
     running = true;
     
 
@@ -22,7 +22,7 @@ export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop) {
                 entities:entities,
                 ctx:ctx,
                 stopgame:()=>{
-                    running = false;      
+                    if (!zen) running = false;      
                 }
             });
         });
@@ -57,24 +57,25 @@ export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop) {
             });
         });
         
-        let spawnpos = [];
-        let rand = Math.floor(Math.random()*4);
-        switch (rand) {
-            case 0:
-                spawnpos = [((Math.random()*2)-1)*(ctx.canvas.width/2), ctx.canvas.height/2]
-                break;
-            case 1:
-                spawnpos = [((Math.random()*2)-1)*(ctx.canvas.width/2), -ctx.canvas.height/2]
-                break;
-            case 2:
-                spawnpos = [ctx.canvas.width/2, ((Math.random()*2)-1)*(ctx.canvas.height/2)]
-                break;
-            case 3:
-                spawnpos = [-ctx.canvas.width/2, ((Math.random()*2)-1)*(ctx.canvas.height/2)]
-                break;
+        if (!zen) {
+            let spawnpos = [];
+            let rand = Math.floor(Math.random()*4);
+            switch (rand) {
+                case 0:
+                    spawnpos = [((Math.random()*2)-1)*(ctx.canvas.width/2), ctx.canvas.height/2]
+                    break;
+                case 1:
+                    spawnpos = [((Math.random()*2)-1)*(ctx.canvas.width/2), -ctx.canvas.height/2]
+                    break;
+                case 2:
+                    spawnpos = [ctx.canvas.width/2, ((Math.random()*2)-1)*(ctx.canvas.height/2)]
+                    break;
+                case 3:
+                    spawnpos = [-ctx.canvas.width/2, ((Math.random()*2)-1)*(ctx.canvas.height/2)]
+                    break;
+            }
+            entities.push(new Enemy(spawnpos[0], spawnpos[1]));
         }
-        entities.push(new Enemy(spawnpos[0], spawnpos[1]));
- 
     };
 
     

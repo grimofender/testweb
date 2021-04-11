@@ -25,7 +25,7 @@
                     });
                 }
 
-                start(ctx, startcallback);
+                start(ctx, startcallback, document.getElementById("zen").checked);
             }
             $(document).one("click", begin);
         </script>
@@ -33,6 +33,7 @@
 
     <body style="background-color: hsl(173, 100%, 13%);">
         <canvas id="canvas" style="position:fixed; left:0; top:0; width:100%; height:100%; display:none;"></canvas>
+        <input id="zen" type="checkbox">Zen (disables friendly fire & enemies)</input>
         <p id="instruction" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center;">
             <mark style="color:#ff0000; background:none;">press WASD (or the arrow keys) to move</mark> <br>
             <mark style="color:#0000ff; background:none;">click the left mouse button to shoot a laser</mark> <br>

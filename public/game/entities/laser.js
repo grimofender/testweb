@@ -9,7 +9,7 @@ export class Laser extends Entity {
         super();
         this.position = [x, y];
         this.direction = direction;
-        this.timeout = 5;
+        this.timeout = 5*document.getElementById("bullet_lifetime").value;
         this.fadetime = 1;
     }
 

@@ -1,11 +1,13 @@
 <html style="overflow: hidden;" >
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <audio id="menu_music" src="public/game/audio/christmas-time-is-here.mp3" loop></audio>
         <script type="module">
             import {start} from "./public/game/game.js"
             function begin() {
                 $("#instruction").fadeOut(1000);
                 $("#canvas").fadeIn(500);
+                document.getElementById("menu_music").pause();
     
                 const ctx = /** @type {HTMLCanvasElement}}**/ (document.getElementById("canvas")).getContext("2d");
 
@@ -29,12 +31,24 @@
                 $("#settings").children().fadeOut(1000);
                 start(ctx, startcallback, document.getElementById("zen").checked);
             }
+
+            $("#start_screen").one("click", () => {
+                $("#start_screen").fadeOut(1000);
+                document.getElementById("menu_music").play();
+            });
             $("#start_button").one("click", begin);
         </script>
     </head>
 
     <body style="background-color: hsl(173, 100%, 13%);">
         <canvas id="canvas" style="position:fixed; left:0; top:0; width:100%; height:100%; display:none;"></canvas>
+        <form id="start_screen" style="user-select: none; position:fixed; z-index: 2; left:0; top:0; width:100%; height:100%; background-color: black;"> 
+            <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; color:white">
+                Made by grimofender <br>
+                click to begin
+            </p>
+        </form>
+
         <div id="settings" style="user-select: none; position:fixed; z-index: 1;">           
             <p><input id="zen" type="checkbox"></input> Zen (disables friendly fire & enemies)</p>
             <p><input id="bullet_speed" type="number" value="100" max="500" min="0"></input> % Bullet Speed</p>

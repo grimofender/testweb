@@ -7,6 +7,10 @@ var entities = Array(0);
 var running = false;
 var zen = false;
 
+var pressedKeys = {};
+window.addEventListener("keyup", e => { pressedKeys[e.keyCode] = false; })
+window.addEventListener("keydown", e => { pressedKeys[e.keyCode] = true; });
+
 export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop, should_zen) {
     running = true;
     zen = should_zen
@@ -29,6 +33,7 @@ export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop, shoul
             });
         });
 
+        if (running) running = !pressedKeys[84];
         if (running) setTimeout(update, 0);
         else {
             onstop();

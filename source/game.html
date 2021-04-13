@@ -21,7 +21,7 @@
                     $(instructions).fadeIn(1000);
                     $("#settings").children().fadeIn(1000).children().fadeIn(1000);
                     $("#start_button").one("click", ()=> {
-                        start(ctx, startcallback)
+                        start(ctx, startcallback, document.getElementById("zen").checked)
                         $(instructions).fadeOut(1000);
                         $("#settings").children().fadeOut(1000);
                     });

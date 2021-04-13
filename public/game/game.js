@@ -5,9 +5,11 @@ import { canvasToGlobal } from "./math.js";
 var tickerstarted = false;
 var entities = Array(0);
 var running = false;
+var zen = false;
 
-export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop, zen) {
+export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop, should_zen) {
     running = true;
+    zen = should_zen
     
 
     entities.splice(0, entities.length);

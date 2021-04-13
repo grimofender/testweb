@@ -20,18 +20,7 @@ export class Enemy extends Entity {
         this.position[1] += this.velocity[1]*delta;
 
         meta.entities.forEach((/** @type {Entity}**/ entity, index) => {
-            if (entity instanceof Laser) {
-                let pt = [entity.position[0] + 10, entity.position[1] + 5];
-                let distance = Math.sqrt(Math.pow(pt[0]-this.position[0], 2)+Math.pow(pt[1]-this.position[1], 2));
-                if (distance < 30) {
-                    meta.entities.forEach((/** @type {Entity}**/ entity, index) => {
-                        if (entity === this) {
-                            meta.entities.splice(index,1);
-                            return false;
-                        }
-                    });
-                }
-            } else if (entity instanceof Player) {
+            if (entity instanceof Player) {
                 var dir = Math.atan2(entity.position[1]-this.position[1], entity.position[0]-this.position[0]);
 
                 this.velocity[0] = lerp(this.velocity[0], Math.cos(dir)*this.speed, delta*this.friction);
@@ -44,9 +33,6 @@ export class Enemy extends Entity {
                     });
                 }
             }
-            
-            
-
         });
         
     }

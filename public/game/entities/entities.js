@@ -10,5 +10,14 @@ export class Entity {
     tick(meta) {
         throw new Error("Method 'tick(meta)' must be implemented.");
     }
+
+    destroy(meta) {
+        meta.entities.forEach((/** @type {Entity}**/ entity, index) => {
+            if (entity === this) {
+                meta.entities.splice(index,1);
+                return false;
+            }
+        });
+    }
 }
 

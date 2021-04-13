@@ -15,7 +15,8 @@ export class Enemy extends Entity {
         this.speed = 325;
     }
 
-    process(delta, meta) {
+    process(delta, meta) { }
+    physics(delta, meta) {
         this.position[0] += this.velocity[0]*delta;
         this.position[1] += this.velocity[1]*delta;
 
@@ -34,9 +35,7 @@ export class Enemy extends Entity {
                 }
             }
         });
-        
     }
-    
     tick(meta) {
     }
 

@@ -20,18 +20,29 @@ export function start(/** @type {CanvasRenderingContext2D}**/ ctx, onstop, shoul
     entities.push(new Player(0, 0));
 
     let lasttime = performance.now();
+
+
+
+    var accumalateddelta = 0;
+    let physics_delta = 1000/document.getElementById("physics_fps").value;
     async function update() {
         let delta = performance.now() - lasttime;
         lasttime = performance.now();
+        accumalateddelta += delta;
+        var meta = {
+            entities:entities,
+            ctx:ctx,
+            stopgame:()=>{
+                if (!zen) running = false;      
+            }
+        }
         entities.forEach((/** @type {Entity}**/ entity, index) => {
-            entity?.process(delta/1000, {
-                entities:entities,
-                ctx:ctx,
-                stopgame:()=>{
-                    if (!zen) running = false;      
-                }
-            });
+            entity?.process(delta/1000, meta);
+            for (let i = 0; i < Math.floor(accumalateddelta/physics_delta); i++) {
+                entity?.physics(physics_delta/1000, meta);
+            }
         });
+        accumalateddelta -= Math.floor(accumalateddelta/physics_delta)*physics_delta;
 
         if (running) running = !pressedKeys[84];
         if (running) setTimeout(update, 0);

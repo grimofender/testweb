@@ -60,14 +60,15 @@ export class Player extends Entity {
             var dir = Math.atan2(localmousepos[1]-this.position[1], localmousepos[0]-this.position[0]);
             meta.entities.push(new Laser(this.position[0] + Math.cos(dir)*40, this.position[1] + Math.sin(dir)*40, dir))
         }
+    }
+    physics(delta, meta) {
         this.position[0] += this.velocity[0]*delta;
         this.position[1] += this.velocity[1]*delta;
 
         this.position[0] = wrap(this.position[0], -(meta.ctx.canvas.width/2)-this.scale[0], (meta.ctx.canvas.width/2)+this.scale[0]);
         this.position[1] = wrap(this.position[1], -(meta.ctx.canvas.height/2)-this.scale[1], (meta.ctx.canvas.height/2)+this.scale[1]);
-        
     }
-    
+
     tick(meta) {
     }
 

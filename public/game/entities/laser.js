@@ -17,6 +17,21 @@ export class Laser extends Entity {
     }
 
     process(delta, meta) {
+        this.timeout -= delta;
+        if (this.timeout <= 0) {
+            this.fadetime -= delta;
+            if (this.fadetime <= 0) {
+                meta.entities.forEach((/** @type {Entity}**/ entity, index) => {
+                    if (entity === this) {
+                        meta.entities.splice(index,1);
+                        return false;
+                    }
+                });
+            }
+        }
+    }
+
+    physics(delta, meta) {
         this.position[0] += Math.cos(this.direction)*delta*400*(document.getElementById("bullet_speed").value/100);
         this.position[1] += Math.sin(this.direction)*delta*400*(document.getElementById("bullet_speed").value/100);
         if (Math.abs(this.position[0]) > (meta.ctx.canvas.width/2)) {
@@ -32,30 +47,13 @@ export class Laser extends Entity {
             let pt = [entity.position[0] + 10, entity.position[1] + 5];
             let distance = Math.sqrt(Math.pow(pt[0]-this.position[0], 2)+Math.pow(pt[1]-this.position[1], 2));
 
-            if (distance < 20/(document.getElementById("bullet_size").value/100)) {
+            if (distance < 20*(1+Number((entity instanceof Enemy)))/(document.getElementById("bullet_size").value/100)) {
                 collided = true;
                 if (this.hostile && entity instanceof Player) meta.stopgame();
                 else if (entity instanceof Enemy) entity.destroy(meta);
             }
         });
         if (!collided) this.hostile = true;
-        
-
-
-        this.timeout -= delta;
-        if (this.timeout <= 0) {
-            this.fadetime -= delta;
-            if (this.fadetime <= 0) {
-                meta.entities.forEach((/** @type {Entity}**/ entity, index) => {
-                    if (entity === this) {
-                        meta.entities.splice(index,1);
-                        return false;
-                    }
-                });
-            }
-        }
-
-
     }
 
     draw(/** @type {CanvasRenderingContext2D}**/ ctx) {

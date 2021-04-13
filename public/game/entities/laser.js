@@ -1,5 +1,9 @@
 import { globalToCanvas } from "../math.js";
 import { Entity } from "./entities.js"
+
+
+var width 
+
 export class Laser extends Entity {
     constructor(x, y, direction) {
         super();
@@ -37,7 +41,13 @@ export class Laser extends Entity {
     draw(/** @type {CanvasRenderingContext2D}**/ ctx) {
         ctx.fillStyle = `hsla(${(performance.now()/4)%360}, 100%, 50%, ${this.fadetime*100}%)`;
         let screenpos = globalToCanvas(this.position, ctx);
-        ctx.fillRect(screenpos[0], screenpos[1], 20*(document.getElementById("bullet_size").value/100), 10*(document.getElementById("bullet_size").value/100));
+        let width = 20*(document.getElementById("bullet_size").value/100);
+        let height = 10*(document.getElementById("bullet_size").value/100);
+        ctx.save();
+            ctx.translate(screenpos[0], screenpos[1])
+            ctx.rotate(this.direction);
+            ctx.fillRect(-width/2, -height/2, width, height);
+        ctx.restore();
     }
 
     tick(meta) {}
